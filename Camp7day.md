@@ -406,13 +406,13 @@ public class DrawPattern {
 	public void q12(int count, String unit) {
 		int blank = count * 2;
 		int blank2 = blank;
-		for(int i=0;i<count;i++) {
-			for(int j=0;j<blank;j++) {
+		for(int i=0;i < count;i++) {
+			for(int j=0;j < blank;j++) {
 				System.out.print(" ");
 			}
 			blank -= (count - i - 1);
 			System.out.print(unit);
-			for(int j=0;j<blank2;j++) {
+			for(int j=0;j < blank2;j++) {
 				System.out.print(" ");
 			}
 			blank2 += ((count-i-1)*2);
@@ -447,8 +447,8 @@ public class DrawPattern {
 				room[--y][x] = num++;
 		}
 		
-		for(int i=0;i<count;i++) {
-			for(int j=0;j<count;j++) {
+		for(int i=0;i < count;i++) {
+			for(int j=0;j < count;j++) {
 				System.out.printf("%3d", room[i][j]);
 			}
 			System.out.println("");
@@ -456,7 +456,7 @@ public class DrawPattern {
 	}
 	
 	boolean ismoveable(int[][] room, int y, int x, int r) {
-		return -1<y&&y<r && -1<x&&x<r && room[y][x] == 0;
+		return -1 < y&&y < r && -1 < x&&x < r && room[y][x] == 0;
 	}
 }
 </code>
