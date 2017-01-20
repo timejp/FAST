@@ -86,4 +86,4 @@ implements한 클래스에서 Interface에 대한 기능을 적어준다.
 > 속도 빠른데신 클래스가 정의 된 순간 메모리에 올라가기 때문에 메모리 차지를 한다.
 * * *
 
-[오늘 작업한 소스](https://github.com/timejp/FAST/tree/master/Camp9day/BBS)
+[오늘 작업한 소스](https://github.com/timejp/FAST/tree/356ff7551c5003f55ad2bda05996da0a9d40b10e/Project/BBS)
