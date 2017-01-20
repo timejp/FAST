@@ -47,16 +47,15 @@ public class MainBbs {
 		System.out.print("Title : ");
 		bbs.setTitle(scanner.next());
 		System.out.print("Content : ");
-		String content = "";
+		StringBuffer content = new StringBuffer();
 		while (true) {
 			String line = scanner.nextLine();
 			if (line.equals(":q")) {
-				content = content.substring(0, content.length() - 1);
 				break;
 			}
-			content += line + '\n';
+			content.append(line + '\n');
 		}
-		bbs.setContent(content);
+		bbs.setContent(content.substring(1, content.length() - 1));
 		System.out.print("Author : ");
 		bbs.setAuthor(scanner.next());
 		System.out.println("-------------------------------------------");
@@ -72,12 +71,19 @@ public class MainBbs {
 			System.out.println(" 1. readAll\n 2. read\n 3. cancel");
 			switch (scanner.next()) {
 			case "1":
+				System.out.println("--------------ReadAll---------------");
 				for (Bbs item : BbsController.shared().readAll())
 					item.print();
+				System.out.println("\n--------------ReadAll---------------");
 				return;
 			case "2":
 				System.out.print("번호를 입력하세요.");
-				BbsController.shared().read(parseInt(scanner.nextLine())).print();
+				Bbs bbs = BbsController.shared().read(parseInt(scanner.next()));
+				if (bbs == null) {
+					System.out.println("존재 하지 않습니다.");
+					return;
+				}
+				bbs.print();
 				return;
 			case "3":
 				System.out.println("취소합니다.");
@@ -89,14 +95,18 @@ public class MainBbs {
 	}
 
 	private void updateBbs(Scanner scanner) {
-		BbsController.shared().update(inputBbs(scanner));
+		System.out.print("번호를 입력하세요.");
+		int bbsno = parseInt(scanner.next());
+		Bbs bbs = inputBbs(scanner);
+		bbs.setBbsno(bbsno);
+		BbsController.shared().update(bbs);
 	}
 
 	private void deleteBbs(Scanner scanner) {
 		System.out.print("번호를 입력하세요.");
-		BbsController.shared().delete(parseInt(scanner.nextLine()));
+		BbsController.shared().delete(parseInt(scanner.next()));
 	}
-	
+
 	private int parseInt(String value) {
 		try {
 			return Integer.parseInt(value);

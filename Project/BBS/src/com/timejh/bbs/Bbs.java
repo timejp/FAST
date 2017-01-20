@@ -8,18 +8,23 @@ package com.timejh.bbs;
  */
 public class Bbs {
 
-	private int bbsno;
-	private String title;
-	private String content;
-	private String author;
-	private String datetime;
-
+	private int bbsno = 0;
+	private String title = "";
+	private String content = "";
+	private String author = "";
+	private String datetime = "";
+	
 	public Bbs() {
-		title = "제목없음";
+		
 	}
 
-	public Bbs(String title) {
-		this.title = title;
+	public Bbs(String data) {
+		String[] datas = data.split("\\|");
+		this.bbsno = Integer.parseInt(datas[0]);
+		this.title = datas[1].replaceAll("[*]n", "\n");
+		this.content = datas[2].replaceAll("[*]n", "\n");
+		this.author = datas[3].replaceAll("[*]n", "\n");
+		this.datetime = datas[4].replaceAll("[*]n", "\n");
 	}
 
 	public Bbs(int bbsno, String title, String content, String author, String datetime) {
@@ -35,8 +40,12 @@ public class Bbs {
 	}
 
 	public String toString() {
-		return String.format("%03d번\n\tTitle : %s\nContent : \t%s\nAuthor : \t%s\t\nDatetime : %s\t|\n", bbsno, title, content, author, datetime)
-				.toString();
+		return String.format("\n%03d번\nTitle : %s\nContent : %s\nAuthor : %s\nDatetime : %s\n", bbsno, title, content,
+				author, datetime).toString();
+	}
+	
+	public String toFileString() {
+		return String.format("%d|%s|%s|%s|%s\n", bbsno, title.replaceAll("\n", "*n"), content.replaceAll("\n", "*n"), author.replaceAll("\n", "*n"), datetime.replaceAll("\n", "*n"));
 	}
 
 	public int getBbsno() {

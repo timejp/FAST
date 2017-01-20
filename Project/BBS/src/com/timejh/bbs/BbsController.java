@@ -1,5 +1,6 @@
 package com.timejh.bbs;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +20,10 @@ public class BbsController {
 
 	public BbsController() {
 		database = new Database();
-		bbsno = 0;
+	}
+	
+	private void updateBbsno() {
+		bbsno = database.getLastBbsno();
 	}
 
 	/**
@@ -40,9 +44,15 @@ public class BbsController {
 	 * @param bbs
 	 */
 	public void create(Bbs bbs) {
-		bbs.setBbsno(++bbsno);
-		bbs.setDatetime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-		database.add(bbs);
+		updateBbsno();
+		try {
+			bbs.setBbsno(++bbsno);
+			bbs.setDatetime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+			database.setLastBbsno(bbsno);
+			database.add(bbs);
+		} catch (IOException e) {
+			error(e);
+		}
 	}
 
 	/**
@@ -52,7 +62,12 @@ public class BbsController {
 	 * @return
 	 */
 	public Bbs read(int bbsno) {
-		return database.read(bbsno);
+		try {
+			return database.read(bbsno);
+		} catch (IOException e) {
+			error(e);
+		}
+		return null;
 	}
 
 	/**
@@ -61,7 +76,12 @@ public class BbsController {
 	 * @return
 	 */
 	public ArrayList<Bbs> readAll() {
-		return database.readAll();
+		try {
+			return database.readAll();
+		} catch (IOException e) {
+			error(e);
+		}
+		return null;
 	}
 
 	/**
@@ -70,7 +90,12 @@ public class BbsController {
 	 * @param bbs
 	 */
 	public void update(Bbs bbs) {
-		database.update(bbs);
+		try {
+			bbs.setDatetime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+			database.update(bbs);
+		} catch (IOException e) {
+			error(e);
+		}
 	}
 
 	/**
@@ -79,7 +104,17 @@ public class BbsController {
 	 * @param bbsno
 	 */
 	public void delete(int bbsno) {
-		database.delete(bbsno);
+		try {
+			database.delete(bbsno);
+		} catch (IOException e) {
+			error(e);
+		}
 	}
-
+	
+	private void error(Exception e) {
+		System.out.println("\n\n\n--------------------------------------------");
+		System.out.println(e);
+		System.out.println("데이터에 오류가 있습니다." + Resources.FILEPATH + Resources.FILENAME + "에 오류가 있는지 확인해 주세요.\n종료합니다.");
+		System.exit(1);
+	}
 }
