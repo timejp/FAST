@@ -8,6 +8,7 @@
 ## Android Runtime Architecture
 ![Android Runtime Architecture](https://lh5.googleusercontent.com/MxH8wXEbpzjhfDzbDY52F8jp87ciFPaQxMPQN6xQvzRitaH_hQNarzkK90O3HYfieEPX8g1J2BlxmlSZwbAs5jrqiKeRNfnSmdW1OCKXG6DDmpDm_xA5XRGYDyuVx_50VA)
 * * *
+
 ## Gradle
 1. Compile - 리눅스 상에서의 Compile 및 Build과정
   * Compile : 소스코드 -> 기계어
@@ -30,19 +31,27 @@
 
 * `gradlew build`(유닉스에서 : `./gradlew build)
   * gradle에 설정해 놓은 productFlavors별, debug, release별로 apk를 따로 만들어 준다.
+  
 * * *
+
 ## Lint
 Android Code Scanning Tool
 * 문법이 이상한것들 검사하고 수정해주는 기능
   * Error : 수정해야 다음으로 넘어감
   * Warning : 경고만 줌 (컴파일 가능)
   * Information : 거의 없음 (TODO)
+  
 * * *
+
 ## CI(Continuous_Integration) Travis
 웹상에서 빌드테스트를 하는 툴이다.
 ### 설정파일
 [.travis.yml](https://github.com/timejp/FAST_Settings/blob/master/.travis.yml)
+
 * * *
+
 [참고 pdf](https://github.com/javafa/2nd_Settings/tree/master/ppt)
+
 * * *
+
 [오늘 작업한 소스](https://github.com/timejp/FAST_Settings/tree/ff8b4831bacc6a044a29400a672601f023a13345)
